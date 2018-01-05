@@ -67,10 +67,13 @@
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Cardinal.jpg" alt="Cardinal.jpg">
   </main>
   <script type="text/javascript">
+    // getting all inputs
     const inputs = document.querySelectorAll('input');
+    // attaching the event Listeners for change (endvalues) and mousemove (continuously)
     inputs.forEach(input => input.addEventListener('change', handleUpdate));
     inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
 
+    // changes of the input are inserted in variables and suffix, which we received from suffix variable, is added to the value
     function handleUpdate() {
       const suffix = this.dataset.suffix || '';
       document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
