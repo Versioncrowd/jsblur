@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update CSS Variable with Javascript</title>
+  <style type="text/css">
+    :root{
+      --bgcolor: #ff0000;
+      --sizing: 40%;
+      --blur: 10px;
+    }
+    body{
+      font-size: 1.5rem;
+      font-family: sans-serif;
+      background-color: var(--bgcolor); 
+    }
+    img {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      width: var(--sizing);
+      transform: translate(-50%, -50%);
+      filter: blur(var(--blur));
+      z-index: -10;
+    }
+    h1 {
+      text-align: center;
+      color: white;
+      margin-top: 10px;
+      z-index: 5;
+    }
+    label {
+      margin: 0 5px 0 15px;
+      font-weight: bold;
+      color: white;
+    }
+    input[type=range] {
+      width: 100px;
+    }
+    input[type=color] {
+      width: 100px;
+      height: 30px;
+    }
+    div {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      position: fixed;
+      margin-bottom: 10px; 
+      bottom: 0;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Update CSS Variable using Javascript</h1>
+    <div>
+      <label for="blur">Blur</label>
+      <input type="range" name="blur" min="0" max="25" data-suffix="px">
+      <label for="sizing">Sizing</label>
+      <input type="range" name="sizing" min="5" max="100" data-suffix="%">
+      <label for="bgcolor">Color</label>
+      <input type="color" name="bgcolor" value="#ff0000">
+    </div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Cardinal.jpg" alt="Cardinal.jpg">
+  </main>
+  <script type="text/javascript">
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => input.addEventListener('change', handleUpdate));
+    inputs.forEach(input => input.addEventListener('mousemove', handleUpdate));
+
+    function handleUpdate() {
+      const suffix = this.dataset.suffix || '';
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+    }
+  </script>
+</body>
+</html>
